@@ -1,11 +1,21 @@
 module Marooned
   class CLI
     def initialize(argv)
-      puts argv
+      @argv = argv
     end
 
     def run
-      puts "Running"
+      global_options.parse!(@argv)
+    end
+
+    def global_options
+      OptionParser.new do |opts|
+        opts.banner = "usage: marooned [-v | --version] [-h | --help] [options]"
+
+        opts.on("-v", "--version", "Print the version and exit") do
+          puts "#{ Marooned::VERSION }"
+        end
+      end
     end
   end
 end
