@@ -2,6 +2,7 @@ module Marooned
   class CLI
     def initialize(argv)
       @argv = argv
+      @options = {}
     end
 
     def run
@@ -14,6 +15,16 @@ module Marooned
 
         opts.on("-v", "--version", "Print the version and exit") do
           puts "#{ Marooned::VERSION }"
+          exit
+        end
+
+        opts.on("-h", "--help", "Print the help message and exit") do
+          puts opts
+          exit
+        end
+
+        opts.on("-p", "--project [PROJECT_NAME]", "Specify the Xcode project to check") do |project|
+          @options[:project] = project
         end
       end
     end
