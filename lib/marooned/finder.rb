@@ -3,10 +3,7 @@ module Marooned
     def find(directory)
       search_path = File.join(directory, "**/*")
       files = Dir.glob(search_path)
-      files = files.select do |file|
-        File.file? file
-      end
-
+      files = files.select(&method(:filter_absolute_paths))
       files = relative_paths(files, directory)
       files = files.reject(&method(:file_filter))
       absolute_paths(files, directory)
@@ -16,6 +13,14 @@ module Marooned
 
     def file_filter(file)
       regex.match(file)
+    end
+
+    def filter_absolute_paths(path)
+      if absolute_regex.match(path)
+        return true
+      end
+
+      File.file? path
     end
 
     def absolute_paths(files, directory)
@@ -30,6 +35,14 @@ module Marooned
       end
     end
 
+    def absolute_regex
+      Regexp.union(
+        [
+          /\/[^\/]*.xcdatamodel$/,
+        ]
+      )
+    end
+
     def regex
       Regexp.union(
         [
@@ -39,6 +52,10 @@ module Marooned
           /\.xcassets\/.*$/,
           /\.xcodeproj\/.*$/,
           /\.xcworkspace\/.*$/,
+          /Gemfile(\.lock)?$/,
+          /Podfile(\.lock)?$/,
+          /^bin\/.*$/,
+          /\.xcdatamodel\/contents$/,
         ]
       )
     end
