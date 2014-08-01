@@ -36,6 +36,9 @@ module Marooned
           /^license(\..*)?$/i,
           /^readme(\..*)?$/i,
           /^Pods\/.*/,
+          /\.xcassets\/.*$/,
+          /\.xcodeproj\/.*$/,
+          /\.xcworkspace\/.*$/,
         ]
       )
     end
