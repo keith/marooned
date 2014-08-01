@@ -7,6 +7,7 @@ module Marooned
 
     def run
       global_options.parse!(@argv)
+      Runner.new.run(@options)
     end
 
     def global_options
