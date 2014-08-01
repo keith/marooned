@@ -13,6 +13,11 @@ describe Marooned::Runner do
       expect { Marooned::Runner.new.run({}) }.to raise_exception SystemExit
     end
 
+    it "should ignore pods projects" do
+      allow(Dir).to receive(:glob).and_return(["Pods.xcodeproj"])
+      expect { Marooned::Runner.new.run({}) }.to raise_exception SystemExit
+    end
+
     it "should not overwrite the passed project" do
       options = Marooned::Runner.new.run({project: "foo.xcodeproj"})
       expect(options[:project]).to eq("foo.xcodeproj")
