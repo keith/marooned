@@ -1,4 +1,3 @@
-require "bundler/gem_tasks"
 require "rake/packagetask"
 
 $LOAD_PATH.unshift(File.expand_path("../lib", __FILE__))
