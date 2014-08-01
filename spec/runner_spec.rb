@@ -10,12 +10,12 @@ describe Marooned::Runner do
 
     it "should fail if there are no projects" do
       allow(Dir).to receive(:glob).and_return([])
-      expect { Marooned::Runner.new.run({}) }.to raise_exception SystemExit
+      expect { Marooned::Runner.new.run({}) }.to raise_exception MaroonedException
     end
 
     it "should ignore pods projects" do
       allow(Dir).to receive(:glob).and_return(["Pods.xcodeproj"])
-      expect { Marooned::Runner.new.run({}) }.to raise_exception SystemExit
+      expect { Marooned::Runner.new.run({}) }.to raise_exception MaroonedException
     end
 
     it "should not overwrite the passed project" do

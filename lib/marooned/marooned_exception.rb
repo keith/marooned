@@ -1,0 +1,2 @@
+class MaroonedException < Exception
+end

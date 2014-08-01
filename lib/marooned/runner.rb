@@ -23,8 +23,7 @@ module Marooned
     end
 
     def exit_project_files
-      STDERR.puts "No xcodeproj files available"
-      exit 1
+      raise MaroonedException, "No xcodeproj files available"
     end
   end
 end

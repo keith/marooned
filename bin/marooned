@@ -3,4 +3,9 @@
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'marooned'
 
-Marooned::CLI.new(ARGV).run
+begin
+  Marooned::CLI.new(ARGV).run
+rescue MaroonedException => e
+  puts e.message
+  exit 1
+end
