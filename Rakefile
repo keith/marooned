@@ -71,7 +71,7 @@ namespace :homebrew do
     task :build do
       formula = File.read("homebrew/marooned.rb")
       formula.gsub!("__VERSION__", Marooned::VERSION)
-      formula.gsub!("__SHA__", `shasum pkg/marooned-#{ Marooned::VERSION }.tar.gz`.split.first)
+      formula.gsub!("__SHA__", `shasum #{ GH_PAGES_DIR }/marooned-#{ Marooned::VERSION }.tar.gz`.split.first)
       File.write("#{ HOMEBREW_FORMULAE_DIR }/Formula/marooned.rb", formula)
     end
   end
@@ -88,14 +88,14 @@ namespace :tarball do
 
   desc "Move tarball into gh-pages"
   task :move do
-    FileUtils.mv("pkg/marooned-#{Marooned::VERSION}.tar.gz", GH_PAGES_DIR)
+    FileUtils.mv("pkg/marooned-#{ Marooned::VERSION }.tar.gz", GH_PAGES_DIR)
   end
 
   desc "Check in the new tarball"
   task :commit do
     Dir.chdir(GH_PAGES_DIR) do
-      `git add marooned-#{Marooned::VERSION}.tar.gz`
-      `git commit -m "Release version #{Marooned::VERSION}"`
+      `git add marooned-#{ Marooned::VERSION }.tar.gz`
+      `git commit -m "Release version #{ Marooned::VERSION }"`
     end
   end
 
@@ -103,6 +103,17 @@ namespace :tarball do
   task :push do
     Dir.chdir(GH_PAGES_DIR) do
       `git push`
+    end
+  end
+
+  desc "Remove gh-pages and pkg directories"
+  task :clean do
+    if Dir.exists?(GH_PAGES_DIR)
+      FileUtils.rm_rf(GH_PAGES_DIR)
+    end
+
+    if Dir.exists?("pkg")
+      FileUtils.rm_rf("pkg")
     end
   end
 
