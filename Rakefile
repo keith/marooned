@@ -1,6 +1,8 @@
 require "bundler/gem_tasks"
-require "marooned/version"
 require "rake/packagetask"
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __FILE__))
+require "marooned/version"
 
 GEMS_DIR = "vendor/gems"
 GH_PAGES_DIR = "gh-pages"
@@ -18,6 +20,20 @@ namespace :gems do
       FileUtils.rm_r(GEMS_DIR)
     end
   end
+end
+
+desc "Push new release"
+task :release => ["release:build", "release:push", "release:clean"]
+
+namespace :release do
+  desc "Build a new release"
+  task :build => ["tarball:build", "homebrew:build"]
+
+  desc "Push sub-repositories"
+  task :push => ["tarball:push", "homebrew:push"]
+
+  desc "Clean all build artifacts"
+  task :clean => ["gems:clean", "tarball:clean", "homebrew:clean"]
 end
 
 namespace :homebrew do
@@ -91,6 +107,7 @@ namespace :tarball do
     end
   end
 
+  # :package task
   Rake::PackageTask.new("marooned", Marooned::VERSION) do |p|
     p.need_tar_gz = true
     p.package_files.include("src/**/*")
