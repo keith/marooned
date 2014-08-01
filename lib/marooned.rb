@@ -1,4 +1,2 @@
+require "marooned/cli"
 require "marooned/version"
-
-module Marooned
-end
