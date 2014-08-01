@@ -5,7 +5,7 @@ describe Marooned::Finder do
     it "should return a list of files in the directory" do
       dir = File.join(Pathname.new(__FILE__).dirname, "fixtures/test")
       files = Marooned::Finder.new.find(Pathname.new(dir))
-      expect(files).to eq(["foo.txt"])
+      expect(files).to eq([File.join(dir, "foo.txt")])
     end
   end
 end

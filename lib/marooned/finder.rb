@@ -8,7 +8,8 @@ module Marooned
       end
 
       files = relative_paths(files, directory)
-      files.reject(&method(:file_filter))
+      files = files.reject(&method(:file_filter))
+      absolute_paths(files, directory)
     end
 
     private
