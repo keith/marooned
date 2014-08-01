@@ -1,0 +1,4 @@
+{
+  "lib/marooned/*.rb": {"alternate": "spec/{}_spec.rb"},
+  "spec/*_spec.rb": {"alternate": "lib/marooned/{}.rb"}
+}
