@@ -1,1 +1,7 @@
-language: ruby
+language: objective-c
+script: bundle exec rake
+rvm:
+  - 2.0.0
+branches:
+  only:
+    master
