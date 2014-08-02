@@ -1,4 +1,5 @@
 require "rake/packagetask"
+require "rspec/core/rake_task"
 
 $LOAD_PATH.unshift(File.expand_path("../lib", __FILE__))
 require "marooned/version"
@@ -124,3 +125,8 @@ namespace :tarball do
     p.package_files.include("LICENSE")
   end
 end
+
+desc "Run tests"
+RSpec::Core::RakeTask.new(:spec)
+
+task default: :spec
