@@ -30,12 +30,12 @@ module Marooned
 
     def first_xcode_project
       projects = Dir.glob("*.xcodeproj")
-      projects = projects.reject(&method(:is_pods_project))
+      projects = projects.reject(&method(:pods_project?))
       exit_project_files unless projects.length > 0
       projects.first
     end
 
-    def is_pods_project(project)
+    def pods_project?(project)
       project == "Pods.xcodeproj"
     end
 

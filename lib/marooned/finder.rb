@@ -16,10 +16,7 @@ module Marooned
     end
 
     def filter_absolute_paths(path)
-      if absolute_regex.match(path)
-        return true
-      end
-
+      return true if absolute_regex.match(path)
       File.file? path
     end
 
@@ -38,7 +35,7 @@ module Marooned
     def absolute_regex
       Regexp.union(
         [
-          /\/[^\/]*.xcdatamodel$/,
+          %r{/[^/]*.xcdatamodel$},
         ]
       )
     end

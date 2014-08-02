@@ -16,33 +16,33 @@ namespace :gems do
 
   desc "Remove vendorized dependencies"
   task :clean do
-    if Dir.exists?(GEMS_DIR)
-      FileUtils.rm_r(GEMS_DIR)
-    end
+    FileUtils.rm_r(GEMS_DIR) if Dir.exist?(GEMS_DIR)
   end
 end
 
 desc "Push new release"
-task :release => ["gems:vendorize", "release:build", "release:push", "release:clean"]
+task release:
+  ["gems:vendorize", "release:build", "release:push", "release:clean"]
 
 namespace :release do
   desc "Build a new release"
-  task :build => ["tarball:build", "homebrew:build"]
+  task build: ["tarball:build", "homebrew:build"]
 
   desc "Push sub-repositories"
-  task :push => ["tarball:push", "homebrew:push"]
+  task push: ["tarball:push", "homebrew:push"]
 
   desc "Clean all build artifacts"
-  task :clean => ["gems:clean", "tarball:clean", "homebrew:clean"]
+  task clean: ["gems:clean", "tarball:clean", "homebrew:clean"]
 end
 
 namespace :homebrew do
   desc "Generate homebrew formula and add it to the repo"
-  task :build => ["checkout", "formula:build", "commit"]
+  task build: ["checkout", "formula:build", "commit"]
 
   desc "Checkout homebrew repo locally"
   task :checkout do
-    `git clone https://github.com/Keithbsmiley/homebrew-formulae.git #{ HOMEBREW_FORMULAE_DIR }`
+    `git clone https://github.com/Keithbsmiley/homebrew-formulae.git
+      #{ HOMEBREW_FORMULAE_DIR }`
   end
 
   desc "Check in the new Homebrew formula"
@@ -62,9 +62,7 @@ namespace :homebrew do
 
   desc "Remove Homebrew repo"
   task :clean do
-    if Dir.exists?(HOMEBREW_FORMULAE_DIR)
-      FileUtils.rm_rf(HOMEBREW_FORMULAE_DIR)
-    end
+    FileUtils.rm_rf(HOMEBREW_FORMULAE_DIR) if Dir.exist?(HOMEBREW_FORMULAE_DIR)
   end
 
   namespace :formula do
@@ -72,7 +70,10 @@ namespace :homebrew do
     task :build do
       formula = File.read("homebrew/marooned.rb")
       formula.gsub!("__VERSION__", Marooned::VERSION)
-      formula.gsub!("__SHA__", `shasum #{ GH_PAGES_DIR }/marooned-#{ Marooned::VERSION }.tar.gz`.split.first)
+      formula.gsub!(
+        "__SHA__",
+        `shasum #{ GH_PAGES_DIR }/marooned-#{ Marooned::VERSION }.tar.gz`
+          .split.first)
       File.write("#{ HOMEBREW_FORMULAE_DIR }/Formula/marooned.rb", formula)
     end
   end
@@ -80,11 +81,12 @@ end
 
 namespace :tarball do
   desc "Build the tarball"
-  task :build => ["checkout", "package", "move", "commit"]
+  task build: ["checkout", "package", "move", "commit"]
 
- desc "Checkout gh-pages"
+  desc "Checkout gh-pages"
   task :checkout do
-    `git clone --branch gh-pages https://github.com/Keithbsmiley/marooned.git #{ GH_PAGES_DIR }`
+    `git clone --branch gh-pages https://github.com/Keithbsmiley/marooned.git
+      #{ GH_PAGES_DIR }`
   end
 
   desc "Move tarball into gh-pages"
@@ -109,13 +111,8 @@ namespace :tarball do
 
   desc "Remove gh-pages and pkg directories"
   task :clean do
-    if Dir.exists?(GH_PAGES_DIR)
-      FileUtils.rm_rf(GH_PAGES_DIR)
-    end
-
-    if Dir.exists?("pkg")
-      FileUtils.rm_rf("pkg")
-    end
+    FileUtils.rm_rf(GH_PAGES_DIR) if Dir.exist?(GH_PAGES_DIR)
+    FileUtils.rm_rf("pkg") if Dir.exist?("pkg")
   end
 
   # :package task

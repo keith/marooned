@@ -24,7 +24,8 @@ module Marooned
           exit
         end
 
-        opts.on("-p", "--project [PROJECT_NAME]", "Specify the Xcode project to check") do |project|
+        opts.on("-p", "--project [PROJECT_NAME]",
+                "Specify the Xcode project to check") do |project|
           @options[:project] = project
         end
       end

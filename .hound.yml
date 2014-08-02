@@ -1,2 +1,17 @@
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/WordArray:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/AccessorMethodName:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/TrailingComma:
+  Enabled: false

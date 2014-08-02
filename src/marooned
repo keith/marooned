@@ -1,15 +1,15 @@
 #!/usr/bin/ruby --disable-gems
 
-require 'pathname'
+require "pathname"
 
 file_path = Pathname.new(__FILE__).realpath
-gems_setup = File.expand_path('../../vendor/gems/setup.rb', file_path)
+gems_setup = File.expand_path("../../vendor/gems/setup.rb", file_path)
 
 require gems_setup
 
-$LOAD_PATH.unshift(File.expand_path('../../rubylib', file_path))
+$LOAD_PATH.unshift(File.expand_path("../../rubylib", file_path))
 
-require 'marooned'
+require "marooned"
 
 begin
   Marooned::CLI.new(ARGV).run

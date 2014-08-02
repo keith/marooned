@@ -10,7 +10,7 @@ module Marooned
     private
 
     def verify_project(project)
-      return if File.directory? project and project.to_s.end_with? ".xcodeproj"
+      return if File.directory?(project) && project.to_s.end_with?(".xcodeproj")
       raise MaroonedException, "#{ project } is an invalid project file"
     end
   end

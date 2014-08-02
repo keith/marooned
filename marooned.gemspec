@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Keith Smiley"]
   spec.email         = ["keithbsmiley@gmail.com"]
   spec.summary       = "Find files stranded from Xcode"
-  spec.description   = "Find source files that are not referenced from your Xcode project. Something that could happen after a merge conflict for example."
+  spec.description   = "Find files stranded from your Xcode project"
   spec.homepage      = "https://github.com/Keithbsmiley/marooned"
   spec.license       = "MIT"
   spec.files         = []
