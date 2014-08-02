@@ -1,0 +1,14 @@
+diff --git i/vendor/gems/xcodeproj-0.18.0/lib/xcodeproj/plist_helper.rb w/vendor/gems/xcodeproj-0.18.0/lib/xcodeproj/plist_helper.rb
+index e836cfb..79aff11 100644
+--- i/vendor/gems/xcodeproj-0.18.0/lib/xcodeproj/plist_helper.rb
++++ w/vendor/gems/xcodeproj-0.18.0/lib/xcodeproj/plist_helper.rb
+@@ -1,9 +1,6 @@
+ begin
+   require 'libxml'
+ rescue LoadError
+-  Xcodeproj::UI.warn "Xcodeproj is using a fall back solution for parsing " \
+-    "XML. To use a faster alternative install libxml:\n" \
+-    "`$ gem install libxml-ruby`"
+ end
+ require 'cfpropertylist'
+ 

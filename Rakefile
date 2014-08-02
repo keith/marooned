@@ -11,6 +11,7 @@ namespace :gems do
   desc "Vendorize dependencies"
   task :vendorize do
     system("vendor/vendorize", GEMS_DIR)
+    `git apply vendor/xcodeproj.patch`
   end
 
   desc "Remove vendorized dependencies"
