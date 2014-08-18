@@ -22,8 +22,7 @@ namespace :gems do
 end
 
 desc "Push new release"
-task release:
-  ["gems:vendorize", "release:build", "release:push", "release:clean"]
+task release: ["release:build", "release:push", "release:clean"]
 
 namespace :release do
   desc "Build a new release"
