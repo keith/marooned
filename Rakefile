@@ -42,8 +42,7 @@ namespace :homebrew do
 
   desc "Checkout homebrew repo locally"
   task :checkout do
-    `git clone https://github.com/Keithbsmiley/homebrew-formulae.git
-      #{ HOMEBREW_FORMULAE_DIR }`
+    `git clone https://github.com/Keithbsmiley/homebrew-formulae.git #{ HOMEBREW_FORMULAE_DIR }`
   end
 
   desc "Check in the new Homebrew formula"
