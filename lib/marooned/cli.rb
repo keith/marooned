@@ -28,6 +28,12 @@ module Marooned
                 "Specify the Xcode project to check") do |project|
           @options[:project] = project
         end
+
+        opts.on("-d", "--directory [DIRECTORY_NAME]",
+                "Specify the directory to search for files in") do |directory|
+          path = Pathname.new(File.join(Pathname.pwd, directory))
+          @options[:directory] = path
+        end
       end
     end
   end
