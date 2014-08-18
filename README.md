@@ -20,6 +20,10 @@ Print the list of files for a specific project:
 $ marooned --project Sparrow.xcodeproj
 ```
 
+```sh
+$ marooned --project Foo.xcodeproj --directory path/to/source/files
+```
+
 ## Installation
 
 ```sh
