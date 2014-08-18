@@ -86,8 +86,7 @@ namespace :tarball do
 
   desc "Checkout gh-pages"
   task :checkout do
-    `git clone --branch gh-pages https://github.com/Keithbsmiley/marooned.git
-      #{ GH_PAGES_DIR }`
+    `git clone --branch gh-pages https://github.com/Keithbsmiley/marooned.git #{ GH_PAGES_DIR }`
   end
 
   desc "Move tarball into gh-pages"
