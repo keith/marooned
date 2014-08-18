@@ -20,6 +20,9 @@ Print the list of files for a specific project:
 $ marooned --project Sparrow.xcodeproj
 ```
 
+Print the list of files from a specific directory. This can be useful if
+you are sharing files with another project.
+
 ```sh
 $ marooned --project Foo.xcodeproj --directory path/to/source/files
 ```
