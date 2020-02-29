@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
 group :dist do
-  gem "xcodeproj", "~> 0.18"
+  gem "xcodeproj"
 end
 
 group :development do
-  gem "bundler", "~> 1.6"
-  gem "rake", "~> 10.0"
-  gem "rspec", "~> 3.0"
+  gem "bundler"
+  gem "rake"
+  gem "rspec"
 end
