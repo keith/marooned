@@ -30,6 +30,5 @@ $ marooned --project Foo.xcodeproj --directory path/to/source/files
 ## Installation
 
 ```sh
-brew tap Keithbsmiley/formulae
-brew install marooned
+brew install keith/formulae/marooned
 ```
