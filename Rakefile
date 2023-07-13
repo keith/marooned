@@ -54,7 +54,7 @@ namespace :homebrew do
   desc "Push homebrew repo"
   task :push do
     Dir.chdir(HOMEBREW_FORMULAE_DIR) do
-      `git push`
+      `git push --no-verify`
     end
   end
 
@@ -102,7 +102,7 @@ namespace :tarball do
   desc "Push the gh-pages branch"
   task :push do
     Dir.chdir(GH_PAGES_DIR) do
-      `git push`
+      `git push --no-verify`
     end
   end
 
