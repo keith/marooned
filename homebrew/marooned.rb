@@ -1,8 +1,8 @@
 require "formula"
 
 class Marooned < Formula
-  homepage "https://github.com/Keithbsmiley/marooned/"
-  url "http://keithbsmiley.github.io/marooned/marooned-__VERSION__.tar.gz"
+  homepage "https://github.com/keith/marooned/"
+  url "http://keith.github.io/marooned/marooned-__VERSION__.tar.gz"
   sha1 "__SHA__"
 
   depends_on "xcproj" => :recommended

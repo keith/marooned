@@ -41,7 +41,7 @@ namespace :homebrew do
 
   desc "Checkout homebrew repo locally"
   task :checkout do
-    `git clone https://github.com/Keithbsmiley/homebrew-formulae.git #{ HOMEBREW_FORMULAE_DIR }`
+    `git clone https://github.com/keith/homebrew-formulae.git #{ HOMEBREW_FORMULAE_DIR }`
   end
 
   desc "Check in the new Homebrew formula"
@@ -84,7 +84,7 @@ namespace :tarball do
 
   desc "Checkout gh-pages"
   task :checkout do
-    `git clone --branch gh-pages https://github.com/Keithbsmiley/marooned.git #{ GH_PAGES_DIR }`
+    `git clone --branch gh-pages https://github.com/keith/marooned.git #{ GH_PAGES_DIR }`
   end
 
   desc "Move tarball into gh-pages"

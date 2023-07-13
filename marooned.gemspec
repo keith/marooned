@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["keithbsmiley@gmail.com"]
   spec.summary       = "Find files stranded from Xcode"
   spec.description   = "Find files stranded from your Xcode project"
-  spec.homepage      = "https://github.com/Keithbsmiley/marooned"
+  spec.homepage      = "https://github.com/keith/marooned"
   spec.license       = "MIT"
   spec.files         = []
   spec.extensions    = ["extconf.rb"]
