@@ -1,7 +1,5 @@
 # Marooned
 
-[![Build Status](https://travis-ci.org/Keithbsmiley/marooned.svg?branch=master)](https://travis-ci.org/Keithbsmiley/marooned)
-
 Marooned is a simple CLI to find files that have been stranded from your
 Xcode project file. This has happened to me after resolving merge
 conflicts.
