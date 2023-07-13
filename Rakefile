@@ -70,7 +70,7 @@ namespace :homebrew do
       formula.gsub!("__VERSION__", Marooned::VERSION)
       formula.gsub!(
         "__SHA__",
-        `shasum #{ GH_PAGES_DIR }/marooned-#{ Marooned::VERSION }.tar.gz`
+        `shasum -a sha256 #{ GH_PAGES_DIR }/marooned-#{ Marooned::VERSION }.tar.gz`
           .split.first)
       File.write("#{ HOMEBREW_FORMULAE_DIR }/Formula/marooned.rb", formula)
     end
