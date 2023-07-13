@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rake gems:vendorize && rake release
+bundle exec rake gems:vendorize && bundle exec rake release
