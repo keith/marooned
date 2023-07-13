@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "bundler"
+require "fileutils"
 
 EX_USAGE = 64
 
