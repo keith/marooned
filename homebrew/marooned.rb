@@ -5,8 +5,6 @@ class Marooned < Formula
   url "https://keith.github.io/marooned/marooned-__VERSION__.tar.gz"
   sha256 "__SHA__"
 
-  depends_on "xcproj" => :recommended
-
   def install
     prefix.install "vendor"
     prefix.install "lib" => "rubylib"
