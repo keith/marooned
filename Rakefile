@@ -96,7 +96,7 @@ namespace :tarball do
   task :commit do
     Dir.chdir(GH_PAGES_DIR) do
       system("git add marooned-#{ Marooned::VERSION }.tar.gz", exception: true)
-      system("git commit -m "Release version #{ Marooned::VERSION }"", exception: true)
+      system("git commit -m 'Release version #{ Marooned::VERSION }'", exception: true)
     end
   end
 
