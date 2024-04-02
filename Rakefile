@@ -11,7 +11,7 @@ HOMEBREW_FORMULAE_DIR = "homebrew-formulae"
 namespace :gems do
   desc "Vendorize dependencies"
   task :vendorize do
-    system("vendor/vendorize", GEMS_DIR)
+    system("vendor/vendorize", GEMS_DIR, exception: true)
   end
 
   desc "Remove vendorized dependencies"
@@ -40,21 +40,21 @@ namespace :homebrew do
 
   desc "Checkout homebrew repo locally"
   task :checkout do
-    `git clone https://github.com/keith/homebrew-formulae.git #{ HOMEBREW_FORMULAE_DIR }`
+    system("git clone https://github.com/keith/homebrew-formulae.git #{ HOMEBREW_FORMULAE_DIR }", exception: true)
   end
 
   desc "Check in the new Homebrew formula"
   task :commit do
     Dir.chdir(HOMEBREW_FORMULAE_DIR) do
-      `git add Formula/marooned.rb`
-      `git commit -m "marooned: Release version #{ Marooned::VERSION }"`
+      system("git add Formula/marooned.rb", exception: true)
+      system("git commit -m 'marooned: Release version #{ Marooned::VERSION }'", exception: true)
     end
   end
 
   desc "Push homebrew repo"
   task :push do
     Dir.chdir(HOMEBREW_FORMULAE_DIR) do
-      `git push --no-verify`
+      system("git push --no-verify", exception: true)
     end
   end
 
@@ -68,10 +68,11 @@ namespace :homebrew do
     task :build do
       formula = File.read("homebrew/marooned.rb")
       formula.gsub!("__VERSION__", Marooned::VERSION)
-      formula.gsub!(
-        "__SHA__",
-        `shasum -a sha256 #{ GH_PAGES_DIR }/marooned-#{ Marooned::VERSION }.tar.gz`
-          .split.first)
+      sha = `shasum -a 256 #{ GH_PAGES_DIR }/marooned-#{ Marooned::VERSION }.tar.gz`
+      if $? != 0
+        raise "Failed to calculate SHA256 checksum"
+      end
+      formula.gsub!("__SHA__", sha.split.first)
       File.write("#{ HOMEBREW_FORMULAE_DIR }/Formula/marooned.rb", formula)
     end
   end
@@ -83,7 +84,7 @@ namespace :tarball do
 
   desc "Checkout gh-pages"
   task :checkout do
-    `git clone --branch gh-pages https://github.com/keith/marooned.git #{ GH_PAGES_DIR }`
+    system("git clone --branch gh-pages https://github.com/keith/marooned.git #{ GH_PAGES_DIR }", exception: true)
   end
 
   desc "Move tarball into gh-pages"
@@ -94,15 +95,15 @@ namespace :tarball do
   desc "Check in the new tarball"
   task :commit do
     Dir.chdir(GH_PAGES_DIR) do
-      `git add marooned-#{ Marooned::VERSION }.tar.gz`
-      `git commit -m "Release version #{ Marooned::VERSION }"`
+      system("git add marooned-#{ Marooned::VERSION }.tar.gz", exception: true)
+      system("git commit -m "Release version #{ Marooned::VERSION }"", exception: true)
     end
   end
 
   desc "Push the gh-pages branch"
   task :push do
     Dir.chdir(GH_PAGES_DIR) do
-      `git push --no-verify`
+      system("git push --no-verify", exception: true)
     end
   end
 
